@@ -1,18 +1,27 @@
 # TaskManager
+
 .net core 轻量任务调度框架（基于Quartz.net ）
 
-要写任务了吗？ 下面是过关秘籍：
 
+说明 :
+
+TaskManager.Service 为任务调度主程序
+本地调试 就控制台运行就OK， 线上可以部署成服务。
+
+部署服务步骤:
+1 生成项目
+2 找到【TaskManager.Service\bin\Debug\netcoreapp2.2\win7-x64】
+3 管理员运行cmd ，切换到工作目录为【TaskManager.Service\bin\Debug\netcoreapp2.2\win7-x64】
+4 在cmd中输入 【TaskManager.Service.exe install】 ps：如需卸载 在cmd中 输入【TaskManager.Service.exe uninstall】
+
+
+开发指南：
 
 1 在Jobs文件夹下找个合适地方 创建一个 netcore控制台应用   名字类似：TaskManager.Job.*
 
-2 这个控制台默认运行使用dotnet运行的  要编辑 【Task.Manager.Job.*.csproj】文件
-  在  【 <TargetFramework>netcoreapp2.2</TargetFramework> 】下方 
-  添加一行 ：【<RuntimeIdentifier>win7-x64</RuntimeIdentifier>】
-  这样生成项目就会在这个目录 bin\Debug\netcoreapp2.2\win7-x64  生成exe文件了 
+2 这个控制台默认运行使用dotnet运行的  要编辑 【Task.Manager.Job.*.csproj】文件  在 【 <TargetFramework>netcoreapp2.2</TargetFramework> 】下方  添加一行 ：【<RuntimeIdentifier>win7-x64</RuntimeIdentifier>】  这样生成项目就会在这个目录 bin\Debug\netcoreapp2.2\win7-x64  生成exe文件了 
 
-3 右键项目 点击属性 选择【生成事件】 在后期生成事件命令 粘贴下面代码
-【 xcopy /r /y $(TargetDir)* $(SolutionDir)\TaskManager.Service\$(OutDir)Jobs\$(ProjectName)\ /s /e 】
+3 右键项目 点击属性 选择【生成事件】 在后期生成事件命令 粘贴下面代码 【 xcopy /r /y $(TargetDir)* $(SolutionDir)\TaskManager.Service\$(OutDir)Jobs\$(ProjectName)\ /s /e 】
 
 4 在控制台中写你任务的逻辑…
 
@@ -28,24 +37,7 @@
 6 齐活 完美！
 
 
-
-说明 :
-
-第一点：
-
-TaskManager.Service 为任务调度主程序
-本地调试 就控制台运行就OK， 线上可以部署成服务。
-
-部署服务步骤:
-1 生成项目
-2 找到【TaskManager.Service\bin\Debug\netcoreapp2.2\win7-x64】
-3 管理员运行cmd ，切换到工作目录为【TaskManager.Service\bin\Debug\netcoreapp2.2\win7-x64】
-4 在cmd中输入 【TaskManager.Service.exe install】 ps：如需卸载 在cmd中 输入【TaskManager.Service.exe uninstall】
-
-
-
-
-第二点：
+下面附录cron表达式
 
 cron表达式生成url：http://www.bejson.com/othertools/cron/
 
